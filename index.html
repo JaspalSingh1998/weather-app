@@ -14,7 +14,6 @@
     <title>Weather Forecast App</title>
   </head>
   <body>
-    <!-- <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="Weather Icon" /> -->
     <div class="card">
       <div class="search-city">
         <label for="query">
@@ -28,7 +27,67 @@
           <button type="submit" class="btn">Get Weather</button>
         </label>
       </div>
+      <main>
+        <div class="current-data">
+          <p class="date-time">5:05 PM, Mon, Nov 23, 2020</p>
+          <div class="weather">
+            <div class="icon">
+              <img
+                src="http://openweathermap.org/img/wn/10d@2x.png"
+                alt="Weather Icon"
+              />
+              <h3 class="weather-count">72<sup>&deg;F</sup></h3>
+            </div>
+            <p class="condition">Rainy</p>
+          </div>
+          <div class="wind-humidity">
+            <div class="humidity">
+              <h3>Humidity</h3>
+              <p>45%</p>
+            </div>
+            <div class="wind">
+              <h3>Wind Speed</h3>
+              <p>19.2 km/j</p>
+            </div>
+          </div>
+        </div>
+        <div class="stat-data">
+          <div class="map-container">
+            <h4>Temperature</h4>
+            <canvas id="myChart" width="100" height="20"></canvas>
+          </div>
+          <div class="forecaste">
+            <div class="weather-cards">
+              <div class="weather-card active">
+                <h4 class="day">Today</h4>
+                <img src="http://openweathermap.org/img/wn/10d.png" alt="" />
+                <p class="weather-condition">Humidity</p>
+                <p class="count">30%</p>
+              </div>
+              <div class="weather-card">
+                <h4 class="day">Today</h4>
+                <img src="http://openweathermap.org/img/wn/10d.png" alt="" />
+                <p class="weather-condition">Humidity</p>
+                <p class="count">30%</p>
+              </div>
+              <div class="weather-card">
+                <h4 class="day">Today</h4>
+                <img src="http://openweathermap.org/img/wn/10d.png" alt="" />
+                <p class="weather-condition">Humidity</p>
+                <p class="count">30%</p>
+              </div>
+              <div class="weather-card">
+                <h4 class="day">Today</h4>
+                <img src="http://openweathermap.org/img/wn/10d.png" alt="" />
+                <p class="weather-condition">Humidity</p>
+                <p class="count">30%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
     <script src="./app/script.js"></script>
   </body>
 </html>
