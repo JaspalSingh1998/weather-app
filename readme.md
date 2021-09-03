@@ -1,4 +1,3 @@
-[Demo Here](https://jaspalsingh1998.github.io/weather-app/)
 
 # Features
 
