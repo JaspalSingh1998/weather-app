@@ -10,6 +10,8 @@ const humidityEl = document.querySelector("[data-humidity]");
 const speedEl = document.querySelector("[data-speed]");
 const iconEl = document.querySelector("[data-icon]");
 
+const weatherCards = document.querySelector(".weather-cards");
+const template = document.querySelector("#template");
 searchBtn.addEventListener("click", (e) => {
   const query = queryInput.value;
   if (!query || query === "") return;
@@ -42,9 +44,30 @@ function displayData(data) {
   speedEl.textContent = `${data.current.wind_speed} km/j`;
   conditionEl.textContent = data.current.weather[0].main;
   iconEl.src = `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
-  console.log(data);
+  displayStats(data.daily);
 }
 
+function displayStats(data) {
+  weatherCards.innerHTML = "";
+  for (let i = 1; i <= 4; i++) {
+    const templateClone = template.content.cloneNode(true);
+    const dateTime = getDateTime(data[i].dt).split(",")[2];
+    const humidity = data[i].humidity;
+    const icon = data[i].weather[0].icon;
+
+    const dayEl = templateClone.querySelector("[data-day]");
+    dayEl.textContent = dateTime;
+
+    const dataIcon = templateClone.querySelector("[data-day-icon]");
+    dataIcon.src = `http://openweathermap.org/img/wn/${icon}.png`;
+
+    const countEl = templateClone.querySelector("[data-count]");
+    countEl.textContent = `${humidity}%`;
+
+    weatherCards.appendChild(templateClone);
+  }
+  document.querySelector(".weather-card").classList.add("active");
+}
 function getDateTime(unix_timestamp) {
   let date = new Date(unix_timestamp * 1000);
   const humanDate = date.toLocaleString("en-IN", {
