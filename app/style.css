@@ -25,8 +25,7 @@ body {
 }
 .card {
   background-color: #fff;
-  max-width: 70vw;
-  /* margin: 5rem auto; */
+
   box-shadow: 0 10px 10px rgba(132, 172, 233, 0.418);
   padding: 2rem;
   border-radius: 12px;
@@ -126,8 +125,6 @@ main {
 .map-container,
 .forecaste {
   flex: 1;
-}
-.map-container {
 }
 .weather-cards {
   display: flex;

@@ -35,19 +35,22 @@
               <img
                 src="http://openweathermap.org/img/wn/10d@2x.png"
                 alt="Weather Icon"
+                data-icon
               />
-              <h3 class="weather-count">72<sup>&deg;F</sup></h3>
+              <h3 class="weather-count">
+                <span data-temp>72</span><sup>&deg;F</sup>
+              </h3>
             </div>
             <p class="condition">Rainy</p>
           </div>
           <div class="wind-humidity">
             <div class="humidity">
               <h3>Humidity</h3>
-              <p>45%</p>
+              <p data-humidity>45%</p>
             </div>
             <div class="wind">
               <h3>Wind Speed</h3>
-              <p>19.2 km/j</p>
+              <p data-speed>19.2 km/j</p>
             </div>
           </div>
         </div>
@@ -87,6 +90,19 @@
         </div>
       </main>
     </div>
+
+    <template id="template">
+      <div class="weather-card" data-card>
+        <h4 class="day" data-day>Today</h4>
+        <img
+          src="http://openweathermap.org/img/wn/10d.png"
+          alt=""
+          data-day-icon
+        />
+        <p class="weather-condition" data-condition>Humidity</p>
+        <p class="count" data-count>30%</p>
+      </div>
+    </template>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
     <script src="./app/weather.js"></script>
     <script src="./app/script.js"></script>
