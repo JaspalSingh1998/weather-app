@@ -1,5 +1,7 @@
 const API_KEY = "47f9711a2db49b4ee0bec513face8f0d";
 
+let ctx = document.getElementById("myChart").getContext("2d");
+
 const queryInput = document.querySelector("#query");
 const searchBtn = document.querySelector(".btn");
 
@@ -12,6 +14,9 @@ const iconEl = document.querySelector("[data-icon]");
 
 const weatherCards = document.querySelector(".weather-cards");
 const template = document.querySelector("#template");
+
+let tempDataForCharts = [60, 70, 80, 90];
+
 searchBtn.addEventListener("click", (e) => {
   const query = queryInput.value;
   if (!query || query === "") return;
@@ -45,6 +50,8 @@ function displayData(data) {
   conditionEl.textContent = data.current.weather[0].main;
   iconEl.src = `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
   displayStats(data.daily);
+
+  populateChartData(data.daily);
 }
 
 function displayStats(data) {
@@ -83,4 +90,61 @@ function getDateTime(unix_timestamp) {
     .split(" ")[2]
     .toUpperCase()}, ${separator[0]},${separator[1]},${separator[2]}`;
   return finalDate;
+}
+
+function populateChartData(data) {
+  tempDataForCharts = [];
+  let date = [];
+  for (let i = 1; i <= 4; i++) {
+    let nd = getDateTime(data[i].dt).split(",")[2];
+    date.push(nd.trim());
+    tempDataForCharts.push(data[i].temp.max);
+  }
+  generateChart(tempDataForCharts, date);
+}
+
+const data = {
+  labels: ["today", "03", "04", "05"],
+  datasets: [
+    {
+      data: tempDataForCharts,
+      fill: true,
+      backgroundColor: "rgba(132, 172, 233, 0.418)",
+      borderColor: "rgb(75, 192, 192)",
+      tension: 0.1,
+    },
+  ],
+};
+let myChart = new Chart(ctx, {
+  type: "line",
+  data: data,
+  options: {
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+    scales: {
+      y: {
+        display: false,
+        beginAtZero: false,
+        stepSize: 2,
+        grid: {
+          display: false,
+        },
+      },
+      x: {
+        display: false,
+        grid: {
+          display: false,
+        },
+      },
+    },
+  },
+});
+
+function generateChart(updatedData) {
+  data.labels = updatedData;
+  data.datasets[0].data = updatedData;
+  myChart.update();
 }
