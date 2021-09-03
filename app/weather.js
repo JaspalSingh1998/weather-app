@@ -148,3 +148,23 @@ function generateChart(updatedData) {
   data.datasets[0].data = updatedData;
   myChart.update();
 }
+
+async function getLocation() {
+  const response = await navigator.permissions.query({ name: "geolocation" });
+  const data = await response;
+  if (data.state == "granted") {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      console.log("Not Supported");
+    }
+  } else {
+    getCoords("london");
+  }
+}
+function showPosition(position) {
+  const lat = position.coords.latitude;
+  const lon = position.coords.longitude;
+  getWeather(lat, lon);
+}
+getLocation();
